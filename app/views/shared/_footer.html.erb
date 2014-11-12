@@ -1,0 +1,76 @@
+<!-- Footer -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+	<div id="tertiary" class="sidebar-container" role="complementary">
+		<div class="container_16">
+			
+			<!-- First Widget Area -->
+			<div class="grid_4">
+				<aside id="meta-0" class="widget widget_adress">
+					<h3>Contact us</h3>
+					<address class="vcard">
+						<% @contact_us = ExtraText.tagged_with('contact').first %>
+						<%=raw @contact_us.content %>
+					</address>
+				</aside>
+			</div>
+
+			<!-- Second Widget Area -->
+			<div class="grid_4">
+				<aside id="meta-1" class="widget widget_meta">
+					<h3>Latest Events</h3>
+					<ul>
+						<% for event in Event.order("start DESC").limit(4)%>
+						<li><a href="#"><%= event.title %></a></li>
+						<% end %>
+					</ul>
+				</aside>						
+			</div>
+			
+			<!-- Third Widget Area -->
+			<div class="grid_4">
+				<aside id="meta-2" class="widget widget_meta">
+					<h3>Join Us</h3>
+					<ul>
+						<li><a href="#">The Big Give Team</a></li>
+						<li><a href="#" title="Success Stories">Success Stories</a></li>
+						<li><a href="#" title="Press">Press</a></li>
+						<li><a href="#" title="Contact Us">Contact Us</a></li>
+					</ul>
+				</aside>
+			</div>
+			
+			<!-- Forth Widget Area -->
+			<div class="grid_4">
+				<aside id="meta-3" class="widget widget_meta">
+					<h3>Latest Tweets</h3>
+					<div class="latest-tweets-body">
+						<a href="#">@viktoras</a> Thanks! We're always redesigning things around here :)
+					</div>
+					<div class="clear"></div>
+					<div><a href="#" class="radius follow">Follow @wplook</a></div>
+				</aside>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+	</div>
+
+
+	<!-- Site Info -->
+	<div class="site-info">
+		<div class="container_16">
+			
+			<!-- CopyRight -->
+			<div class="grid_8">
+				<p class="copy">Copyright ©  2014 itSMF(Hong Kong).  All Rights reserved.  </p>
+			</div>
+
+			<!-- Design By -->
+			<div class="grid_8">
+				<p class="designby">Designed by <a href="http://www.advitor.com">THE ADVITOR</a></p>
+			</div>
+
+			<div class="clear"></div>
+		</div>
+	</div><!-- .site-info -->
+</footer><!-- #colophon .site-footer -->

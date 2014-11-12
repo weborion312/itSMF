@@ -1,0 +1,38 @@
+<% content_for :content do %>
+
+<header class="panel-heading text-center">
+  Sign in
+</header>
+<%= form_for(resource, :as => resource_name, :html => {:class => "panel-body"}, :url => session_path(resource_name)) do |f| %>
+
+	<% if alert %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+      <i class="fa fa-ban-circle"></i><strong><%= alert %></strong>
+    </div>
+	<% end %>
+	<% if notice %>
+    <div class="alert alert-info">
+      <button type="button" class="close" data-dismiss="info"><i class="fa fa-times"></i></button>
+      <i class="fa fa-ban-circle"></i><strong><%= notice %></strong>
+    </div>
+	<% end %>
+  <div class="form-group">
+    <label class="control-label">Email</label>
+	<%= f.email_field :email, :autofocus => true, :placeholder => "test@advitor.com", :class => "form-control" %>
+  </div>
+  <div class="form-group">
+    <label class="control-label">Password</label>
+	<%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+  </div>
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :remember_me %> Keep me logged in
+    </label>
+  </div>
+  <small><%= link_to "Forgot password?", new_password_path(resource_name), :class => "pull-right m-t-xs" %></small>
+  <button type="submit" class="btn btn-info">Sign in</button>
+  
+  <% end %>
+  
+<% end %>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	
+	<!--  Basic Page Needs -->
+	<meta charset="UTF-8" />
+	<title>itSMF - Hong Kong Chapter</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="<%= asset_path "favicon.ico"%>" />
+	<link rel="apple-touch-icon" href="<%= asset_path "apple-touch-icon.png" %>" />
+	
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<%= csrf_meta_tags %>
+	<!-- CSS -->
+	<%= stylesheet_link_tag "pages.css" %>
+	<%= stylesheet_link_tag "frontend/font-awesome.min.css" %>
+	<%= stylesheet_link_tag "frontend/flexslider.css" %>
+	<%= stylesheet_link_tag "frontend/font-awesome-ie7.min.css" %>
+	<%= stylesheet_link_tag "frontend/keyframes.css" %>
+	<%= stylesheet_link_tag "frontend/grid.css" %>
+	<%= stylesheet_link_tag "frontend/meanmenu.css" %>
+  	<%= stylesheet_link_tag "application"%>
+
+	
+	<!-- Scripts -->
+	<%= javascript_include_tag "frontend/jquery.min.js" %>
+	<script type='text/javascript' src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+	<%= javascript_include_tag "frontend/base.js" %>
+
+	<!-- Scripts for plugins -->
+	<%= javascript_include_tag "frontend/jquery.fitvids.js" %>
+	<%= javascript_include_tag "frontend/jquery.meanmenu.js" %>
+	<%= javascript_include_tag "frontend/jquery.flexslider-min.js" %>
+	<%= javascript_include_tag "frontend/jquery.inview.js" %>
+	<%= javascript_include_tag "frontend/jquery.scrollParallax.min.js" %>
+	<%= javascript_include_tag "admin/bootstrap.js" %>
+	
+</head>
+<body class="home blog two-column right-sidebar" data-twttr-rendered="true">
+	<div id="page">
+
+		<%= render 'shared/menu'%>
+		
+		<%= render 'shared/breadcrumb' %>
+
+		<div id="main" class="site-main container_16">
+			<div class="inner">
+				<div id="primary" class="grid_11 suffix_1">
+					
+					<!-- article -->
+					<% if @page.browser_url == 'archive' %>
+						<% @articles = Article.where('year(publish_date) = ? and month(publish_date) = ?', params[:year], params[:month]).tagged_with(@page_component.where(component_table: 'articles').first.tag_list).order('publish_date DESC').paginate(:page => params[:page], :per_page => 5) %>
+					<% elsif @page.browser_url == 'article-tags' %>
+						<% @articles = Article.tagged_with(params[:tag]).order('publish_date DESC').paginate(:page => params[:page], :per_page => 5) %>
+					<% else %>
+						<% @articles = Article.tagged_with(@page_component.where(component_table: 'articles').first.tag_list).order('publish_date DESC').paginate(:page => params[:page], :per_page => 5) %>
+					<% end %>
+					<% for a in @articles %>
+					<article class="list">
+						<div class="short-content">
+							<figure>
+								<a title="Image title" href="/articles/<%= a.id %>/<%= a.browser_url %>">
+									<img width="272" height="150" src="<%= a.cover.url(:thumb) %>" class="wp-post-image" alt="Image alt">
+									<div class="mask radius">
+										<div class="mask-square"><i class="icon-link"></i></div>
+									</div>
+								</a>
+							</figure> 
+			
+							<h1 class="entry-header">
+								<a title="<%= a.browser_title %>" href="/articles/<%= a.id %>/<%= a.browser_url %>"><%= a.title %></a>
+							</h1>
+
+							<div class="short-description">
+								<p><%=raw a.content[0..150] %>...</p>
+							</div>
+
+							<div class="entry-meta">
+								<time datetime="<%= a.publish_date %>"><a class="buttons time fleft" href="/articles/<%= a.id %>/<%= a.browser_url %>"><i class="icon-calendar"></i> <%= a.publish_date.strftime("%B %e, %Y") %></a></time> <a class="buttons author fleft" href="/articles/<%= a.id %>/<%= a.browser_url %>"><i class="icon-user"></i> <% @author = User.find(a.author) %><%= @author.first_name %> <%= @author.last_name %></a> <a class="buttons fright" href="/articles/<%= a.id %>/<%= a.browser_url %>" title="read more">read more</a>
+							</div>
+							<div class="clear"></div>
+
+						</div>
+						<div class="clear"></div>
+					</article>
+					<% end %>
+					<!-- Pagination -->
+					<ul class="pagination">
+						<%= will_paginate @articles, :container => false %> 
+						<%= page_entries_info @articles %>
+					</ul>
+	
+				</div>
+				
+				<%= render 'shared/list_page_side_menu'%>
+				
+				
+			</div>
+		</div>
+		
+		<%= render 'shared/footer'%>
+	</div>
+	<!-- /#page -->
+</body>
+</html>

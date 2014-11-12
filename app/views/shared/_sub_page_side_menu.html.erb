@@ -1,0 +1,15 @@
+<div id="secondary" class="grid_4 widget-area" role="complementary">
+
+	<!-- Widget Archive -->
+	<aside id="archives" class="widget">
+		<div class="widget-title">	
+			<h3><%= Page.find(@pm.page_id).title %></h3>
+			<div class="clear"></div>
+		</div>
+		<ul>
+			<% for sm in Menu.where(:parent_id => @pm.id) %>
+			<li class="menu-item"><a href="/<%= sm.page.browser_url %>"><%= sm.page.title %></a></li>
+			<% end %>
+		</ul>	
+	</aside>
+</div>

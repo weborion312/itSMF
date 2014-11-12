@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	
+	<!--  Basic Page Needs -->
+	<meta charset="UTF-8" />
+	<title>itSMF - Hong Kong Chapter</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="<%= asset_path "favicon.ico"%>" />
+	<link rel="apple-touch-icon" href="<%= asset_path "apple-touch-icon.png" %>" />
+	
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<%= csrf_meta_tags %>
+	<!-- CSS -->
+	<%= stylesheet_link_tag "pages.css" %>
+	<%= stylesheet_link_tag "frontend/font-awesome.min.css" %>
+	<%= stylesheet_link_tag "frontend/flexslider.css" %>
+	<%= stylesheet_link_tag "frontend/font-awesome-ie7.min.css" %>
+	<%= stylesheet_link_tag "frontend/keyframes.css" %>
+	<%= stylesheet_link_tag "frontend/grid.css" %>	
+	<%= stylesheet_link_tag "frontend/meanmenu.css" %>	
+	<%= stylesheet_link_tag "frontend/owl.carousel.css" %>	
+	<%= stylesheet_link_tag "frontend/owl.theme.css" %>	
+  	<%= stylesheet_link_tag "application"%>
+	
+	<!-- Scripts -->
+	<%= javascript_include_tag "frontend/jquery.min.js" %>
+	<script type='text/javascript' src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+	<%= javascript_include_tag "frontend/base.js" %>
+
+	<!-- Scripts for plugins -->
+	<%= javascript_include_tag "frontend/jquery.fitvids.js" %>
+	<%= javascript_include_tag "frontend/jquery.meanmenu.js" %>
+	<%= javascript_include_tag "frontend/jquery.flexslider-min.js" %>
+	<%= javascript_include_tag "frontend/jquery.inview.js" %>
+	<%= javascript_include_tag "frontend/jquery.scrollParallax.min.js" %>	
+	<%= javascript_include_tag "frontend/owl.carousel.js" %>	
+	<%= javascript_include_tag "admin/bootstrap.js" %>
+			
+</head>
+<body class="home blog two-column right-sidebar" data-twttr-rendered="true">
+	<div id="page">
+
+		<%= render 'shared/menu'%>
+		<!-- Teaser / Slider -->
+		<div id="teaser">
+			<div class="flexslider loading">
+				<ul class="slides">
+					<% for b in Media.tagged_with(@page_component.where(component_table: 'medias').first.tag_list) %>
+					<li data-thumb="<%= b.item.url(:thumb)%>" >
+						<img src="<%= b.item.url(:large)%>" alt="image allt">
+						<div class="flex-caption ">
+							<div class="flex-content container_16">
+								<div class="grid_16">
+									<h1><%= b.title %></h1>
+									<h2><%= b.description %></h2>
+									<% if b.redirect_url_on == true %>
+									<div class="flex-button"><a class="radius" href="<%= b.redirect_url %>">Read More <i class="icon-angle-right"></i></a></div>
+									<% end %>
+								</div>	
+							</div>
+						</div>
+					</li>
+					<% end %>					
+			  </ul>
+			</div>
+		</div>
+		
+		<div id="main" class="site-main container_16">
+			<div class="inner">
+
+				<!-- First widget areea -->
+				<div class="grid_12 first-home-widget-area">
+					<aside id="flexlatestnews" class="WPlookLatestNews flex-container-news" >	
+						<div class="widget-title mright mleft" >
+							<h3>Featured News</h3>
+							<div class="clear"></div>
+						</div>				
+
+						<div id="owl-news" class="latestnews-body flexslider-news owl-carousel">
+							
+							<% for a in Article.tagged_with(@page_component.where(component_table: 'articles').first.tag_list) %>
+							<div class="item">		
+								<div class="heading">										
+									<h3><%= a.title %></h3>
+								</div>
+								<% if a.cover.file? %>
+								<div class="image"><img class="radius" src="<%= a.cover.url(:medium) %>" alt="Image alt"></div><% end %>
+								<div class="content">										
+									<p class="category"><%= a.tag_list %></p>
+									<p class="description"><%=raw a.content[0,180]%>...</p>
+									<div class="flex-button-red"><a class="radius" href="/articles/<%= a.id %>/<%= a.browser_url %>">Read More <i class="icon-angle-right"></i></a></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<% end %>								
+							
+						</div>
+					</aside>
+				</div>
+
+
+				<!-- Second widget areea -->
+				<div class="grid_4 second-home-widget-area">
+					<aside id="wpltfbd-2" class="widget WPlookCauses">	
+						<div class="widget-title">
+							<h3>Events</h3>							
+							<div class="clear"></div>
+						</div>
+						
+						<div id='owl-events' class="widget-event-body owl-carousel">
+							<% for event in Event.tagged_with(@page_component.where(component_table: 'events').first.tag_list).order('start DESC') %>
+
+							<article class="event-item">
+								<h3 class="entry-header">
+									<a title="<%= event.browser_title %>" href="/events/<%= event.id %>/<%= event.browser_url %>"><%= event.title %></a>
+								</h3>
+								<figure>
+									<a title="<%= event.browser_title %>" href="/events/<%= event.id %>/<%= event.browser_url %>">
+										<img width="272" src="<%= event.cover.url(:thumb) %>" class="wp-post-image" alt="Image alt">
+										<div class="mask radius">
+											<div class="mask-square"><i class="icon-link"></i></div>
+										</div>
+									</a>
+								</figure>								
+								<div class="entry-meta-widget">
+									<div class="date"><time datetime="<%= event.start %>"><i class="icon-calendar"></i> <%= event.start.strftime("%B %e, %Y") %></time></div>
+									<div class="location"><i class="icon-map-marker"></i> <a href="#"><%= event.location %></a></div>
+									<div class="facebook"><i class="icon-facebook-sign"></i> <a href="#">Facebook</a></div>
+								</div>
+								
+							</article>
+							<%end%>
+						</div>
+					</aside>
+				</div>
+
+
+				<!-- Third widget areea -->
+				<div class="grid_16 third-home-widget-area">
+					<aside id="wpltfbs-f2w" class="widget WPlookCauses">	
+						<div class="widget-title">
+							<h3>Chapter Dynamics</h3>
+							<div class="viewall fright"><a href="/news" class="radius" title="View all chauses">view all</a></div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="widget-causes-body">
+							<% for e in Article.order("publish_date DESC").limit(4) %>
+							<!-- First cause -->
+							<article class="cause-item">
+								<figure>
+									<a title="<%= e.browser_title %>" href="/articles/<%= e.id %>/<%= e.browser_url %>">
+										<img width="272" height="150" src="<%= e.cover.url(:thumb) %>" class="wp-post-image" alt="<%= e.browser_title %>">
+										<div class="mask radius">
+											<div class="mask-square"><i class="icon-tint"></i></div>
+										</div>
+									</a>
+								</figure>
+								<h3 class="entry-header">
+									<a title="<%= e.browser_title %>" href="/articles/<%= e.id %>/<%= e.browser_url %>"><%= e.title %></a>
+								</h3>
+
+								<div class="short-description">
+									<p><%=raw e.content[0..200] %> ...</p>
+								</div>
+							</article>
+							<% end %>
+							
+
+						</div>
+					</aside>
+				</div>
+
+				<!-- Forth widget areea -->
+				<div class="grid_16 forth-home-widget-area">
+					<aside id="wpltfbf-2" class="widget WPlookAnounce radius" >	
+						<div class="announce-body mright mleft">
+							<div class="margin"><%=raw @page.content %></div>
+						</div>
+					</aside>
+				</div>
+
+				<!-- Fifth Widget area -->
+				<div class="grid_16 fifth-home-widget-area">
+					<aside id="wpltfbe-2" class="widget WPlookStaff" >	
+						<div class="widget-title">
+							<h3>The Council</h3>
+							<div class="viewall fright"><a href="/the-council" class="radius">view all</a></div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="staff-body">
+							<% for u in User.where(role_id: 1).limit(4) %>
+							<div class="candidate grid_4">
+								<div class="candidate-margins">
+									<a href="#">
+										<img width="200" height="210" src="<%= u.cover.url(:medium) %>" class="wp-post-image" alt="<%= u.first_name %> <%= u.last_name %>">
+										<div class="name"><%= u.first_name %> <%= u.last_name %></div>
+										<div class="position"><%= u.position %></div>
+									</a>	
+								</div>
+							</div>
+							<% end %>
+							
+						<div class="clear"></div>
+						</div>
+					</aside>
+
+				</div>
+				<div class="clear"></div>
+
+			</div>
+		</div>
+
+
+
+		<%= render 'shared/footer'%>
+	</div>
+	<!-- /#page -->
+</body>
+</html>

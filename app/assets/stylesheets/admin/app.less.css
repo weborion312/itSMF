@@ -1,0 +1,16 @@
+// Core variables and mixins
+@import "admin/app.variables.less";
+@import "admin/app.mixins.less";
+
+@import "admin/app.reset.less";
+@import "admin/app.layout.less";
+@import "admin/app.nav.less";
+
+@import "admin/app.arrow.less";
+@import "admin/app.buttons.less";
+@import "admin/app.widgets.less";
+
+@import "admin/app.switch.less";
+
+@import "admin/app.colors.less";
+@import "admin/app.utilities.less";

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+	
+	<!--  Basic Page Needs -->
+	<meta charset="UTF-8" />
+	<title>itSMF - Hong Kong Chapter</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="<%= asset_path "favicon.ico"%>" />
+	<link rel="apple-touch-icon" href="<%= asset_path "apple-touch-icon.png" %>" />
+	
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<%= csrf_meta_tags %>
+	<!-- CSS -->
+	<%= stylesheet_link_tag "pages.css" %>
+	<%= stylesheet_link_tag "frontend/font-awesome.min.css" %>
+	<%= stylesheet_link_tag "frontend/flexslider.css" %>
+	<%= stylesheet_link_tag "frontend/font-awesome-ie7.min.css" %>
+	<%= stylesheet_link_tag "frontend/keyframes.css" %>
+	<%= stylesheet_link_tag "frontend/grid.css" %>
+	<%= stylesheet_link_tag "frontend/meanmenu.css" %>
+  	<%= stylesheet_link_tag "application"%>
+
+	
+	<!-- Scripts -->
+	<%= javascript_include_tag "frontend/jquery.min.js" %>
+	<script type='text/javascript' src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
+	<%= javascript_include_tag "frontend/base.js" %>
+
+	<!-- Scripts for plugins -->
+	<%= javascript_include_tag "frontend/jquery.fitvids.js" %>
+	<%= javascript_include_tag "frontend/jquery.meanmenu.js" %>
+	<%= javascript_include_tag "frontend/jquery.flexslider-min.js" %>
+	<%= javascript_include_tag "frontend/jquery.inview.js" %>
+	<%= javascript_include_tag "frontend/jquery.scrollParallax.min.js" %>
+	<%= javascript_include_tag "admin/bootstrap.js" %>
+	
+</head>
+<body class="home blog two-column right-sidebar" data-twttr-rendered="true">
+	<div id="page">
+
+		<%= render 'shared/menu'%>
+		
+		<%= render 'shared/breadcrumb' %>
+
+		<div id="main" class="site-main container_16">
+			<div class="inner">
+				<%= yield(:content)%>
+	
+				<%= render 'shared/list_event_page_side_menu'%>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<%= render 'shared/footer'%>
+	</div>
+	<!-- /#page -->
+</body>
+</html>

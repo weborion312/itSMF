@@ -1,0 +1,171 @@
+<div class="nav-user hidden-xs pos-rlt">            
+            <div class="nav-avatar pos-rlt">
+              <a href="#" class="thumb-sm avatar animated rollIn" data-toggle="dropdown">
+				  <%= image_tag(current_admin_user.cover.url(:thumb))%>
+                <span class="caret caret-white"></span>
+              </a>
+              <ul class="dropdown-menu m-t-sm animated fadeInLeft">
+              	<span class="arrow top"></span>
+                <li>
+                  <a href="/admin/users/<%= current_admin_user.id %>/edit">Profile</a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="badge bg-danger pull-right">3</span>
+                    Notifications
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#">Help</a>
+                </li>
+                <li>
+				  <%= link_to('Logout', destroy_admin_user_session_path, :method => :delete) %> 
+                </li>
+              </ul>
+              <div class="visible-xs m-t m-b">
+                <a href="#" class="h3"><%= current_admin_user.email %></a>
+              </div>
+            </div>
+            <div class="nav-msg">
+              
+              <section class="dropdown-menu m-l-sm pull-left animated fadeInRight">
+                <div class="arrow left"></div>
+                <section class="panel bg-white">
+                  <header class="panel-heading">
+                    <strong>You have <span class="count-n">2</span> notifications</strong>
+                  </header>
+                  <div class="list-group">
+                    <a href="#" class="media list-group-item">
+                      <span class="pull-left thumb-sm">
+                        <img src="<%= current_admin_user.cover.url(:thumb)%>" alt="John said" class="img-circle">
+                      </span>
+                      <span class="media-body block m-b-none">
+                        Use awesome animate.css<br>
+                        <small class="text-muted">28 Aug 13</small>
+                      </span>
+                    </a>
+                    <a href="#" class="media list-group-item">
+                      <span class="media-body block m-b-none">
+                        1.0 initial released<br>
+                        <small class="text-muted">27 Aug 13</small>
+                      </span>
+                    </a>
+                  </div>
+                  <footer class="panel-footer text-sm">
+                    <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
+                    <a href="#">See all the notifications</a>
+                  </footer>
+                </section>
+              </section>
+            </div>
+          </div>
+<!-- nav -->
+<nav class="nav-primary hidden-xs">
+  <ul class="nav">
+    <li>
+      <a href="/admin">
+        <i class="fa fa-eye"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>              
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-users"></i>
+        <span>Users</span>
+      </a>
+      <ul class="dropdown-menu">                
+        <li>
+          <a href="/admin/users">List of Admin Users</a>
+        </li>
+        <li>
+          <a href="/admin/users/new">Add Admin User</a>
+        </li>
+        <li>
+          <a href="/admin/members">List of Members</a>
+        </li>
+        <li>
+          <a href="/admin/members/new">Add Member</a>
+        </li>
+      </ul>
+    </li>
+     <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-file-text"></i>
+        <span>Pages</span>
+      </a>
+      <ul class="dropdown-menu">                
+        <li>
+          <a href="/admin/pages">List of Pages</a>                    
+        </li>
+        <li>
+          <a href="/admin/pages/new">Add Page</a>                    
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+       <i class="fa fa-edit"></i>
+       <span>News Articles</span>
+     </a>
+     <ul class="dropdown-menu">                
+       <li>
+         <a href="/admin/articles">List of News Articles</a>                    
+       </li>
+       <li>
+         <a href="/admin/articles/new">Add News Article</a>                    
+       </li>
+     </ul>
+   </li>
+   <li class="dropdown-submenu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-calendar"></i>
+      <span>Events</span>
+    </a>
+    <ul class="dropdown-menu">                
+      <li>
+        <a href="/admin/events">List of Events</a>                    
+      </li>
+      <li>
+        <a href="/admin/events/new">Add Event</a>                    
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown-submenu">
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+     <i class="fa fa-picture-o"></i>
+     <span>Media</span>
+   </a>
+   <ul class="dropdown-menu">                
+     <li>
+       <a href="/admin/medias">List of Media</a>                    
+     </li>
+     <li>
+       <a href="/admin/medias/new">Add Media Item</a>                    
+     </li>
+   </ul>
+ </li>
+ <li class="dropdown-submenu">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-cog"></i>
+    <span>Settings</span>
+  </a>
+  <ul class="dropdown-menu">  
+    <li>
+      <a href="/admin/menus">Menu</a>                    
+    </li>                
+    <li>
+      <a href="/admin/designed_templates">Template</a>                    
+    </li>
+    <li>
+      <a href="/admin/locales">Locale</a>                    
+    </li>
+    <li>
+      <a href="/admin/settings">System Settings</a>                    
+    </li>
+  </ul>
+</li>
+    
+  </ul>
+</nav>
+<!-- / nav -->

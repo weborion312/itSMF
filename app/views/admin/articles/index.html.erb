@@ -1,0 +1,44 @@
+<% content_for :content do %>
+<section id="content">
+  <section class="vbox">
+	  <%= render 'admin/shared/header'%>
+    <section class="scrollable wrapper">
+      <div class="tab-content">
+        <div class="tab-pane active" id="datatable">
+          <section class="panel">
+            <header class="panel-heading">
+              Articles Table 
+              <i class="fa fa-info-sign text-muted" data-toggle="tooltip" data-placement="bottom" data-title="ajax to load the data."></i> 
+            </header>
+            <div class="table-responsive">
+              <table class="table table-striped m-b-none" data-ride="datatables" data-source="<%= admin_articles_url(format: "json") %>">
+                <thead>
+                  <tr>
+                    <th width="20%">Cover</th>
+                    <th width="20%">Title</th>
+                    <th width="20%">Locale</th>
+                    <th width="15%">Created Date</th>
+                    <th width="15%">Last Update</th>
+                    <th width="10%">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </section>
+  <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+</section>
+<% end %>
+
+<% content_for :extra_stylesheets do %>
+<%= stylesheet_link_tag "admin/datatables/datatables.css" %>
+<% end %>
+
+<% content_for :extra_javascripts do %>
+<%= javascript_include_tag "admin/datatables/jquery.dataTables.min.js"%>
+<% end %>

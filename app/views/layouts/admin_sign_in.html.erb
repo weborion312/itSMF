@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>THE ADVITOR | CONTENT MANAGEMENT SYSTEM</title>
+  <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "admin/bootstrap.css"%>
+  <%= stylesheet_link_tag "admin/animate.css"%>
+  <%= stylesheet_link_tag "admin/font-awesome.min.css"%>
+  <%= stylesheet_link_tag "admin/font.css"%>
+  
+  <%= yield(:extra_stylesheets)%>
+  
+  <%= stylesheet_link_tag "admin/plugin.css"%>
+  <%= stylesheet_link_tag "application"%>
+  <%= stylesheet_link_tag "admin/app.css"%>
+  <!--[if lt IE 9]>
+    <script src="js/ie/respond.min.js" cache="false"></script>
+    <script src="js/ie/html5.js" cache="false"></script>
+    <script src="js/ie/fix.js" cache="false"></script>
+  <![endif]-->
+	 	<%= javascript_include_tag "application"%>
+</head>
+<body>
+  <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
+    <a class="nav-brand" href="index.html">THE ADVITOR CMS</a>
+    <div class="row m-n">
+      <div class="col-md-4 col-md-offset-4 m-t-lg">
+        <section class="panel">
+          
+		  <%= yield :content%>
+        </section>
+      </div>
+    </div>
+  </section>
+  <!-- footer -->
+  <footer id="footer">
+    <div class="text-center padder clearfix">
+      <p>
+        <small>THE ADVITOR<br>&copy; 2014</small>
+      </p>
+    </div>
+  </footer>
+  <%#= javascript_include_tag "admin/jquery.min.js"%>
+  <!-- Bootstrap -->
+  <%= javascript_include_tag "admin/bootstrap.js"%>
+  <!-- App -->
+  <%= javascript_include_tag "admin/app.js" %>
+  <%= javascript_include_tag "admin/app.plugin.js" %>
+  <%= javascript_include_tag "admin/app.data.js" %>
+  <%= javascript_include_tag "admin/libs/jquery.pjax.js" %>
+  
+
+  <%= yield(:extra_javascripts)%>
+  <%#= javascript_include_tag "application"%>
+</body>
+</html>

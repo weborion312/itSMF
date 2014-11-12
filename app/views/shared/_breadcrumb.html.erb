@@ -1,0 +1,20 @@
+
+<div class="item teaser-page-list">
+	<div class="container_16">
+		<aside class="grid_10">
+			<h1 class="page-title">
+				<% if @page.browser_url == 'article-tags' or @page.browser_url == 'event-tags' %>
+					Tag: <%= params[:tag]%>
+				<% else %>
+					<%= @page.title %>
+				<% end %>
+			</h1>
+		</aside>
+		<div class="grid_6">
+			<div id="rootline">
+				<a href="/">Home Page</a> <i class="icon-angle-right"></i> <span class="current"><%= @page.title %></span>	
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

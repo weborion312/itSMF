@@ -1,0 +1,49 @@
+<% content_for :content do %>
+<div id="primary" class="grid_11 suffix_1">
+	<article class="single">
+		
+		<div class="entry-content">
+			<% if @page.cover.file? %>
+			<figure>
+				<img width="848" height="352" src="<%= @page.cover.url(:large)%>" class="wp-post-image" alt="Image alt">
+			</figure> 
+			<% end %>
+			
+			<div class="long-description">
+				<h3><%= @page.title %></h3>
+				<br />
+				<%=raw @page.content %>
+			</div>
+
+			
+			<div class="clear"></div>
+			
+			<div class="entry-meta-press">
+
+				<time class="entry-date fleft" datetime="<%= @page.publish_date %>">
+					<i class="icon-calendar"></i> <%= @page.publish_date.strftime("%B %e, %Y") %>
+				</time>
+
+				<div class="tag-i fleft">
+					<i class="icon-tags"></i>
+					<% @page.tags.each do |t|%>
+						<% if t == @page.tags.last %>
+							<a href="#" title="View all posts in <%= t.name  %>" rel="tag"><%= t.name %></a>
+						<% else%>
+							<a href="#" title="View all posts in <%= t.name %>" rel="tag"><%= t.name %></a>, 
+						<% end %>
+					<% end %>
+				</div>
+
+				<div class="clear"></div>
+			</div>
+
+		</div>
+
+		<div class="clear"></div>
+	
+	</article>
+	
+</div>
+
+<% end %>

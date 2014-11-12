@@ -1,0 +1,143 @@
+<!-- Toolbar -->
+<div id="toolbar">
+	<div class="container_16">
+		<div class="grid_16">
+		<ul>
+			<li class="rss"><a href="#"><i class="icon-rss"></i></a></li>
+			<li class="contact"><a href="/contact-us"><i class="icon-envelope"></i></a></li>
+			<li class="share"><a href="#"><i class="icon-share"></i></a>
+				<ul class="share-items radius-bottom">
+					<li class="share-item-fb radius"><a href="<% fb = Setting.where(name: 'facebook_link').first %><%= fb.blank?? nil : fb.content %>"><i class="icon-facebook-sign"></i></a></li>
+					<li class="share-item-tw radius"><a href="<% tw = Setting.where(name: 'twitter_link').first %><%= tw.blank?? nil : tw.content %>"><i class="icon-twitter-sign"></i></a></li>
+					<li class="share-item-gp radius"><a href="<% gplus = Setting.where(name: 'google_plus_link').first %><%= gplus.blank?? nil : gplus.content %>"><i class="icon-google-plus-sign"></i></a></li>
+				</ul>
+			</li>
+			<li class="search"><a href="#"><i class="icon-search"></i></a>
+				<ul class="search-items radius-bottom">
+					<li>
+						<div class="search-form">
+							<form method="get" id="searchform" action="action">
+								<div>
+									<input class="radius" type="text" size="" name="s" id="s" value="Type your searching word" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/>
+									<input type="submit" id="searchsubmit" value="Search" />
+								</div>
+							</form>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<% if member_signed_in? %>
+			<li class="donate">
+			<%= link_to "Sign Out", destroy_member_session_path, :method => :delete %>
+			</li>
+			
+			<% else %>
+			
+			<li class="donate"><a href="#"  data-toggle="modal" data-target="#login-modal">Join Us <i class="icon-puzzle-piece"></i></a></li>
+			<% end %>
+		</ul>
+		</div>
+	</div>
+</div>
+<!-- /#toolbar -->
+
+<header id="branding" class="site-header" role="banner">
+	<div id="sticky_navigation">
+		<div class="container_16">
+			<hgroup class="fleft grid_5">
+				<a href="/"><%= image_tag "itsmf_logo.png", alt: "itSMF Hong Kong Chapter"%></a>
+			</hgroup>
+
+			<nav role="navigation" class="site-navigation main-navigation grid_11" id="site-navigation">
+				<div class="menu-main-menu-container">
+					<ul id="menu-main-menu" class="nav-menu">
+						
+						<li class="menu-item "><a href="/">HOME</a></li>
+						<% for pm in @menu_parent %>
+						<li class="menu-item ">
+							<% if pm.is_clickable == true %>
+								<% if pm.page.browser_url == "my-profile"%>
+									<%= link_to "My Profile", edit_member_registration_path(current_member) %>
+								<% else %>
+									<a href="/<%= pm.page.browser_url %>"><%= pm.page.title %></a>
+								<% end %>
+							<% else %>
+							<a href="#"><%= pm.page.title %></a>
+							<% end %>
+							<ul class="sub-menu">
+								<% for sm in Menu.where(:parent_id => pm.id) %>
+									<li class="menu-item"><a href="/<%= sm.page.browser_url %>"><%= sm.page.title %></a></li>
+									
+								<% end %>
+							</ul>
+						</li>
+						<% end %>
+						
+					</ul>
+				</div>
+			</nav>
+			<!-- .site-navigation .main-navigation -->
+			<div class="grid_16 mob-nav"></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</header>
+<!-- #masthead .site-header -->
+
+<!-- Large modal -->
+<% if alert %>
+<div class="alert alert-danger">
+  <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+  <i class="fa fa-ban-circle"></i><strong><%= alert %></strong>
+</div>
+<% end %>
+<% if notice %>
+<div class="alert alert-info">
+  <button type="button" class="close" data-dismiss="info"><i class="fa fa-times"></i></button>
+  <i class="fa fa-ban-circle"></i><strong><%= notice %></strong>
+</div>
+<% end %>
+
+<div class="modal fade" id="login-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container_16">
+          <div class="grid_8 b-r ">
+            <h3 class="m-t-none m-b">Exisiting Member</h3>
+            <p>Have an account with us?<br />Sign in now.</p>
+			<%= form_for(resource, :as => resource_name, :html => {:class => 'contact-form'}, :url => session_path(resource_name)) do |f| %>
+				<p>
+					<label for="email"></label>
+					<%= f.email_field :email, :autofocus => true, :class => 'radius', :placeholder => 'Email Adress*' %>
+					<span class="clear"></span>
+				</p>
+
+				<p>
+					<label for="password"></label>
+					<%= f.password_field :password, :class => 'radius', :placeholder => 'Password*' %>
+					<span class="clear"></span>
+				</p>
+			    <% if devise_mapping.rememberable? -%>
+			      <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
+			    <% end -%>
+				<p>
+					<input  class="buttons radius send" value="Sign In" type="submit"></input >
+				</p>
+				<% end %>
+			
+          </div>
+          <div class="grid_7 b-r verticalLine short-content">
+            <h3 class="m-t-none m-b">New Member</h3>
+            <p>New to ITSMF? <br/>Create your account here.</p>
+			<br /><br />
+			<p>
+			<a href="/members/sign_up" class="buttons radius fleft">Create My Account</a>
+			</p>
+          </div>
+		  <div class="clear"></div>
+        </div>          
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>

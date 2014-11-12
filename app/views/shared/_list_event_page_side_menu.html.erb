@@ -1,0 +1,53 @@
+<div id="secondary" class="grid_4 widget-area" role="complementary">
+
+					<!-- Widget Archive -->
+					<aside id="archives" class="widget">
+						<div class="widget-title">	
+							<h3>Events</h3>
+							<div class="clear"></div>
+						</div>
+
+						<ul>
+							<li><a href="/upcoming-events" title="Upcoming Events">Upcoming Events</a></li>
+							<li><a href="/past-events" title="Past Events">Past Events</a></li>
+						</ul>
+					</aside>
+
+
+					<!-- Widget Tags -->
+					<aside id="tag_cloud-2" class="widget widget_tag_cloud">	
+						<div class="widget-title">
+							<h3>Tags</h3>
+							<div class="clear"></div>
+						</div>
+
+						<div class="tagcloud">
+							
+							<% for tag in Event.tag_counts_on(:tags) %>
+							  <%#= link_to tag.name, { :action => :tag, :id => tag.name }, :class => css_class %>
+							<a href="/events/event-tags/<%= tag.name %>/search" class="tag-link-27" title="<%= tag.name %>"><%= tag.name %></a>
+							<% end %>
+							
+						</div>
+					</aside>
+
+
+
+
+
+					<!-- Widget Latest posts -->
+					<aside id="pages" class="widget">
+						<div class="widget-title">	
+							<h3>Latest Events</h3>
+							<div class="clear"></div>
+						</div>
+						<ul>
+							<% for a in Event.order("publish_date DESC").limit(5)%>
+							<li><a href="/events/<%= a.id %>/<%= a.browser_url %>" title="<%= a.browser_title %>"><%= a.browser_title %></a></li>
+							<% end %>
+							
+						</ul>
+					</aside>
+
+				</div>
+<div class="clear"></div>
