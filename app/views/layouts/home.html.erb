@@ -50,7 +50,9 @@
 		<div id="teaser">
 			<div class="flexslider loading">
 				<ul class="slides">
-					<% for b in Media.tagged_with(@page_component.where(component_table: 'medias').first.tag_list) %>
+					
+					<% for b in Media.tagged_with(@page_component.where(component_table: 'medias').first) %>
+
 					<li data-thumb="<%= b.item.url(:thumb)%>" >
 						<img src="<%= b.item.url(:large)%>" alt="image allt">
 						<div class="flex-caption ">
@@ -83,7 +85,7 @@
 
 						<div id="owl-news" class="latestnews-body flexslider-news owl-carousel">
 							
-							<% for a in Article.tagged_with(@page_component.where(component_table: 'articles').first.tag_list) %>
+							<% for a in Article.tagged_with(@page_component.where(component_table: 'articles').first) %>
 							<div class="item">		
 								<div class="heading">										
 									<h3><%= a.title %></h3>
@@ -113,7 +115,7 @@
 						</div>
 						
 						<div id='owl-events' class="widget-event-body owl-carousel">
-							<% for event in Event.tagged_with(@page_component.where(component_table: 'events').first.tag_list).order('start DESC') %>
+							<% for event in Event.tagged_with(@page_component.where(component_table: 'events').first).order('start DESC') %>
 
 							<article class="event-item">
 								<h3 class="entry-header">
